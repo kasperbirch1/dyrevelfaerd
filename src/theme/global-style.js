@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
+import { breakpoints } from '../theme/breakpoints'
 
 export const theme = {
   colour: {
@@ -16,11 +17,6 @@ export const theme = {
       800: '#2d3748',
       900: '#1a202c',
     },
-  },
-  font: {
-    sans: 'Cambay, san-serif',
-    serif: 'Arvo, serif',
-    monospace: '"Ubuntu Mono", monospace',
   },
   lineHeight: {
     none: '1',
@@ -88,13 +84,20 @@ export const GlobalStyle = createGlobalStyle`
   ${reset}
 
   :root {
-    --theme-color: hotpink;
+    --theme-border: 1px solid #d8d8d8;
+    --small-padding: 1rem;
+    --section-padding: 1rem 0; 
+    --theme-color: #0e6998;
+    --theme-background-color: #e2edff;
+    --wrapper-max-size: 1000px;
+    --link-color: #afadba;
+
+
     --text-color: black;
     --menu-text-color: black;
     --background-color: white;
     --header-background-color: transparent;
     --menu-icon-size: 2rem;
-    --wrapper-max-size: 800px;
   }
 
   [data-theme="dark"] {
@@ -114,7 +117,7 @@ export const GlobalStyle = createGlobalStyle`
     scroll-behavior: smooth;
     overflow-y: scroll;
     overflow-x: hidden;
-
+    font-family: Roboto, sans-serif;
   }
 
   body {
@@ -132,10 +135,25 @@ export const GlobalStyle = createGlobalStyle`
     color: inherit;
   }
 
-  .Wrapper {
+  .wrapper {
     width: 90%;
     max-width: var(--wrapper-max-size);
     margin: 0 auto;
+  }
+
+  .grid3column {
+    display: grid;
+    grid-gap: 1rem;
+    @media ${breakpoints.md} {
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 2rem;
+    }
+  }
+
+  .sub-title {
+    font-size: 2rem;
+    grid-column: 1/-1;
+    color: var(--theme-color);
   }
 
   .ReactModal__Overlay{

@@ -4,33 +4,46 @@ import Modal from 'react-modal';
 import { breakpoints } from "../../theme/breakpoints"
 import MenuLiLinks from './MenuLiLinks'
 import { FaBars, FaTimes } from 'react-icons/fa';
+import Logo from '../../images/logo.png'
 
 import styled from 'styled-components'
 const StyledMenuNav = styled.nav`
-    display: flex; 
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
     align-items: center;
     padding: 1rem 0 ;
 
     .menu-logo-container {
-        display: grid;
-        place-content: center;
-        width: 200px;
+        display: flex;
+        align-items: center;
+        img {
+            margin-right: .75rem;
+            width: 2.5rem;
+        }
     }
 
     ul {
         display: none;
-        @media ${breakpoints.sm} {
+        grid-column: 3/-1;
+        @media ${breakpoints.md} {
             width: 100%;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             text-transform: capitalize;
+            li {
+                color: var(--link-color);
+                font-size: .75rem;
+                padding-right: .5rem;
+            }
         }
     }
 
     .menu-icon {
+        grid-column: 3/-1;
+        justify-self: flex-end;
         font-size: var(--menu-icon-size);
-        @media ${breakpoints.sm} {
+        @media ${breakpoints.md} {
         display: none;
         }
     }
@@ -68,17 +81,18 @@ function Menu() {
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     return (
         <>
-            <StyledMenuNav>
-                <div className="menu-logo-container">
-                    <Link to="/">
-                        <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--cUONk15K--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/rdckude3n23s9gnbb2mg.png" alt="Logo" />
-                    </Link>
-                </div>
+            <StyledMenuNav className="wrapper">
+                <Link to="/" className="menu-logo-container">
+                    <img src={Logo} alt="Foreningen for Dyrevelfærd logo" />
+                    <h2>Foreningen for Dyrevelfærd</h2>
+                </Link>
                 <ul>
                     <MenuLiLinks setMenuIsOpen={setMenuIsOpen} />
                 </ul>
                 <FaBars className="menu-icon" style={menuIsOpen ? { color: 'transparent' } : { color: 'inherit' }} onClick={() => setMenuIsOpen(true)} />
             </StyledMenuNav>
+
+
             <StyledModal isOpen={menuIsOpen} onRequestClose={() => setMenuIsOpen(false)}>
                 <nav className="modal-nav">
                     <FaTimes className="modal-menu-icon" onClick={() => setMenuIsOpen(false)} />
