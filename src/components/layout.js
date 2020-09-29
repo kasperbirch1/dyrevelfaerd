@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil';
 import { loginState } from '../Globalstates/Atoms'
 import Header from './header'
-import Footer from './footer'
+import Footer from './Footer'
 import Modal from 'react-modal'
 
 Modal.setAppElement('#___gatsby');
