@@ -32,9 +32,7 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `cambay\:400,700`,
-          `arvo\:400,700`,
-          `ubuntu mono\:400,700`,
+          `Roboto\:400,700`
         ],
       },
     },
