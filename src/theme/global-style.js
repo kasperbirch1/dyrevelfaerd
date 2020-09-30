@@ -84,6 +84,7 @@ export const GlobalStyle = createGlobalStyle`
   ${reset}
 
   :root {
+    --link-color-blue: #007cff;
     --theme-border: 1px solid #d8d8d8;
     --small-padding: 1rem;
     --section-padding: 1rem 0; 
@@ -91,12 +92,12 @@ export const GlobalStyle = createGlobalStyle`
     --theme-background-color: #e2edff;
     --wrapper-max-size: 1000px;
     --link-color: #afadba;
+    --header-background-color: rgba(255,255,255, .5);
 
 
     --text-color: black;
     --menu-text-color: black;
     --background-color: white;
-    --header-background-color: transparent;
     --menu-icon-size: 2rem;
   }
 

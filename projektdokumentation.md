@@ -15,7 +15,7 @@ Gatsby, React, Styled-Components, Netlify, Heroku
 
 ## Dagbog (vurdering af egen indsats + gennemførelse af opgaveforløbet)
 1. Dag<br>
-hej dag 1 
+Første dag er gået godt, jeg har læst opgaven igemmen, hostet til Heroku, opsat gatsby med min tempalate, og lavet næsten alle components inklusv css til frontpage
 
 1. Dag<br>
 hej dag 2

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil';
 import { loginState } from '../Globalstates/Atoms'
-import Header from './header'
+import Header from './Header'
 import Footer from './Footer'
 import Modal from 'react-modal'
 
