@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Link } from 'gatsby'
 import axios from 'axios';
 import styled from 'styled-components'
 const StyledAnimalDetailsPramsSection = styled.section`
