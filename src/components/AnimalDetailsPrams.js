@@ -51,7 +51,7 @@ const AnimalDetailsPrams = ({ urlParam }) => {
                 animal && <AnimalItem animal={animal} />
             }
             {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-            <Link to="/animal-details/2">Se alle vores dyr i slider</Link>
+            <Link to="/animal-details">Se alle vores dyr i slider</Link>
         </StyledAnimalDetailsPramsSection>
     )
 }
