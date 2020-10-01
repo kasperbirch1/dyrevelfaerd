@@ -44,13 +44,12 @@ const AnimalDetailsPrams = ({ urlParam }) => {
     // console.log("animal", animal);
     return (
         <StyledAnimalDetailsPramsSection>
-            {loading ?
-                <p>Loading...</p>
-                :
-                animal && <AnimalItem animal={animal} />
+            {loading
+                ? <p>Loading...</p>
+                : animal
+                    ? <AnimalItem animal={animal} />
+                    : <ErrorlItem animal={animal} error={error} />
             }
-            {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-            <Link to="/animal-details">Se alle vores dyr i slider</Link>
         </StyledAnimalDetailsPramsSection>
     )
 }
@@ -63,13 +62,29 @@ export default AnimalDetailsPrams
 
 const AnimalItem = ({ animal }) => {
     return (
-        <article>
-            <h2 className="sub-title">{`${animal.name}, ${animal.age} år.`}</h2>
-            <p>{animal.description}</p>
-            <img src={animal.asset.url.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com").replace("jfif", "jpg")} alt={animal.name} />
-        </article>
+        <>
+            <article>
+                <h2 className="sub-title">{`${animal.name}, ${animal.age} år.`}</h2>
+                <p>{animal.description}</p>
+                <img src={animal.asset.url.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com").replace("jfif", "jpg")} alt={animal.name} />
+            </article>
+            <Link to="/animal-details">Se alle vores dyr i slider</Link>
+        </>
+
     )
 }
+
+
+const ErrorlItem = ({ error }) => {
+    return (
+        <>
+            <h2 className="sub-title">Der er desværre ikke noget data </h2>
+            {error && <pre style={{ overflowX: "scroll", overflowY: "hidden" }}>{JSON.stringify(error, null, 2)}</pre>}
+
+        </>
+    )
+}
+
 
 
 
