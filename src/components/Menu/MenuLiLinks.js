@@ -9,7 +9,7 @@ const MenuLiLinks = ({ setMenuIsOpen }) => {
             <li><Link onClick={() => { setMenuIsOpen(false) }} to="/#Abouts-Section" >Om os</Link></li>
             <li><Link onClick={() => { setMenuIsOpen(false) }} to="/#Volunteers-Section">Bliv frivillig</Link></li>
             <li><Link onClick={() => { setMenuIsOpen(false) }} to="/#AnimalsInNeed-Section" >Dyr i nød</Link></li>
-            <li><Link onClick={() => { setMenuIsOpen(false) }} to="/animal-details" >Adopter et dyr</Link></li>
+            <li><Link onClick={() => { setMenuIsOpen(false) }} to="/vores-dyr" >Adopter et dyr</Link></li>
 
         </>
     )

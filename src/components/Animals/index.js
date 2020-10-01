@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'gatsby'
 import styled from 'styled-components'
 import axios from 'axios';
 import Pagination from './Pagination'
 import { breakpoints } from '../../theme/breakpoints'
+import { CurrentAnimails } from './CurrentAnimails';
 const StyledAnimalsSection = styled.section`
     padding: var(--section-padding);
     display: grid;
@@ -13,13 +13,17 @@ const StyledAnimalsSection = styled.section`
         grid-gap: 2rem;
     }
     
-   article {
+   .animail-article {
        border: var(--theme-border);
-       display: flex;
-       img {
-           object-fit: cover;
-           max-width: 200px;
+       @media ${breakpoints.md} {
+        display: flex;
        }
+        img {
+            object-fit: cover;
+            @media ${breakpoints.md} {
+                max-width: 200px;
+            }
+        }
        div {
            padding: var(--small-padding);
        }
@@ -70,7 +74,7 @@ const Animals = () => {
             {loading
                 ? <p>LOADING</p>
                 : <>
-                    <AnimalItem currentPosts={currentPosts} totalPosts={posts.length} />
+                    <CurrentAnimails currentPosts={currentPosts} totalPosts={posts.length} />
                     <Pagination
                         postsPerPage={postsPerPage}
                         totalPosts={posts.length}
@@ -84,22 +88,4 @@ const Animals = () => {
 
 export default Animals
 
-const AnimalItem = ({ currentPosts }) => {
-    return (
-        <>
-            {currentPosts.map((element, index) => {
-                return (
-                    <Link key={element.id} to={`/animal-details/${element.id}`} >
-                        <article>
-                            <img src={element.asset.url.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com").replace("jfif", "jpg")} alt={element.name} />
-                            <div>
-                                <h3>{element.name}</h3>
-                                <p>{element.description}</p>
-                            </div>
-                        </article>
-                    </Link>
-                )
-            })}
-        </>
-    )
-}
+

@@ -7,8 +7,8 @@ exports.onCreatePage = async ({ page, actions }) => {
         } 
     */
 
-    if (page.path.match(/^\/animal-details/)) {
-        page.matchPath = "/animal-details/*"
+    if (page.path.match(/^\/vores-dyr/)) {
+        page.matchPath = "/vores-dyr/*"
         createPage(page)
     };
 }

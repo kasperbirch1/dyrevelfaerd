@@ -52,7 +52,7 @@ const AnimalDetailsDefault = () => {
                     ? <p>LOADING</p>
                     : response && response.map(element => {
                         return (
-                            <Link key={element.id} to={`/animal-details/${element.id}`}>
+                            <Link key={element.id} to={`/vores-dyr/${element.id}`}>
                                 <img src={element.asset.url.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com").replace("jfif", "jpg")} alt={element.name} />
                             </Link>
                         )
