@@ -1,24 +1,24 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 
-export default function useApi(url) {
-    const [response, setresponse] = useState(null);
+export default function useApi(url, number) {
+    const [response, setResponse] = useState();
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         const fetchApi = async () => {
             try {
                 setLoading(true)
                 const response = await axios.get(url)
-                setresponse(response);
+                setResponse(response.data);
                 setLoading(false)
-                // console.log("useApi-response", response)
             } catch (error) {
-                console.error(error)
+                setError(error)
             }
-
         }
         fetchApi()
     }, [url])
-    return [response, loading]
+
+    return [response, loading, error]
 }
