@@ -12,22 +12,7 @@ const StyledAnimalsSection = styled.section`
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 2rem;
     }
-    
-   .animail-article {
-       border: var(--theme-border);
-       @media ${breakpoints.md} {
-        display: flex;
-       }
-        img {
-            object-fit: cover;
-            @media ${breakpoints.md} {
-                max-width: 200px;
-            }
-        }
-       div {
-           padding: var(--small-padding);
-       }
-   }
+ 
    .pagination {
        grid-column: 1/-1;
    }

@@ -3,6 +3,7 @@ import Header from './header'
 import Footer from './footer'
 import Modal from 'react-modal'
 
+
 Modal.setAppElement('#___gatsby');
 
 const Layout = ({ children }) => {
