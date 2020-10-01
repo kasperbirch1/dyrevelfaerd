@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import useApi from '../../hooks/useApi'
+import axios from 'axios';
+import Pagination from '../Pagination'
 import { breakpoints } from '../../theme/breakpoints'
 const StyledAnimalsSection = styled.section`
     padding: var(--section-padding);
@@ -11,6 +12,7 @@ const StyledAnimalsSection = styled.section`
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 2rem;
     }
+    
    article {
        border: var(--theme-border);
        display: flex;
@@ -22,37 +24,82 @@ const StyledAnimalsSection = styled.section`
            padding: var(--small-padding);
        }
    }
+   .pagination {
+       grid-column: 1/-1;
+   }
 `
 
 const Animals = () => {
-    const [response, loading] = useApi("https://dyrevelfaerd.herokuapp.com/api/v1/animals")
+    const [url] = useState(`https://dyrevelfaerd.herokuapp.com/api/v1/animals`)
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null)
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(4);
+
+    useEffect(() => {
+        const fetchApi = async () => {
+            try {
+                setLoading(true)
+                const response = await axios.get(url)
+                setPosts(response.data);
+                setLoading(false)
+            } catch (error) {
+                setError(error)
+            }
+        }
+        fetchApi()
+    }, [url])
+
+    // Get current posts
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+    // Change page
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
+
 
     return (
         <StyledAnimalsSection className="wrapper" id="#Animals-Section" >
-            <h2 className="sub-title">Dyr hos os</h2>
+            <div style={{ gridColumn: '1/-1' }}>
+                <h2 className="sub-title" style={{ marginBottom: ".5rem" }}>Dyr hos os</h2>
+                <p>{`${posts.length} dyr`}</p>
+            </div>
             {loading
                 ? <p>LOADING</p>
-                : response && response.data.map(element => {
-                    return (
-                        <AnimalItem key={element.id} id={element.id} name={element.name} description={element.description} img={element.asset.url} />
-                    )
-                })}
+                : <>
+                    <AnimalItem currentPosts={currentPosts} totalPosts={posts.length} />
+                    <Pagination
+                        postsPerPage={postsPerPage}
+                        totalPosts={posts.length}
+                        paginate={paginate}
+                    />
+                </>
+            }
         </StyledAnimalsSection>
     )
 }
 
 export default Animals
 
-const AnimalItem = ({ id, name, description, img }) => {
+const AnimalItem = ({ currentPosts }) => {
     return (
-        <Link to={`/animal-details/${id}`} >
-            <article>
-                <img src={img.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com").replace("jfif", "jpg")} alt={name} />
-                <div>
-                    <h3>{name}</h3>
-                    <p>{description}</p>
-                </div>
-            </article>
-        </Link>
+        <>
+            {currentPosts.map((element, index) => {
+                return (
+                    <Link key={element.id} to={`/animal-details/${element.id}`} >
+                        <article>
+                            <img src={element.asset.url.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com").replace("jfif", "jpg")} alt={element.name} />
+                            <div>
+                                <h3>{element.name}</h3>
+                                <p>{element.description}</p>
+                            </div>
+                        </article>
+                    </Link>
+                )
+            })}
+        </>
     )
 }
