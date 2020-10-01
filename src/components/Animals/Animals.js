@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import axios from 'axios';
-import Pagination from '../Pagination'
+import Pagination from './Pagination'
 import { breakpoints } from '../../theme/breakpoints'
 const StyledAnimalsSection = styled.section`
     padding: var(--section-padding);
