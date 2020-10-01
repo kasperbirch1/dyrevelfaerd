@@ -3,22 +3,27 @@ import { navigate } from 'gatsby'
 import axios from 'axios'
 import qs from 'querystring'
 import { useForm } from "react-hook-form";
+import { breakpoints } from '../../theme/breakpoints'
 import styled from 'styled-components'
 const StyledNewsletterSection = styled.section`
     padding: var(--section-padding);
     background-color: var(--theme-background-color);
     .wrapper {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 2rem;
+        grid-gap: 1.5rem;
+        @media ${breakpoints.md} {
+            grid-template-columns: repeat(2, 1fr);
+        }
         >:first-child {
             grid-column: 1/-1;
         }
         form {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
-            grid-column-gap: 2rem;
             grid-row-gap: .5rem;
+            @media ${breakpoints.md} {
+                grid-template-columns: repeat(2,1fr);
+                grid-column-gap: 2rem;
+            }
 
        label {
            input {
