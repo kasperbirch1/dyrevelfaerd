@@ -18,7 +18,7 @@ Gatsby, React, Styled-Components, Netlify, Heroku
 Første dag er gået godt, jeg har læst opgaven igemmen, hostet til Heroku, opsat gatsby med min tempalate, og lavet næsten alle components inklusv css til frontpage
 
 1. Dag<br>
-hej dag 2
+idag har jeg skiftet placeholder-data ud med data der kommer fra api ved at lave mit eget react-hook (useApi.js), details site, login fomular der videre sender mig til en anden fumular der kan tilføje et nyt dyr, lavet slider med link til details
 
 1. Dag<br>
 hej dag 3
