@@ -39,7 +39,7 @@ const Animals = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null)
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(4);
+    const [postsPerPage] = useState(8);
 
     useEffect(() => {
         const fetchApi = async () => {

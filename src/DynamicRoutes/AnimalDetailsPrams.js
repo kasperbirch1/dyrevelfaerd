@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import AnimalSlider from './AnimalSlider'
 import { Link } from 'gatsby'
 import axios from 'axios';
 import styled from 'styled-components'
@@ -48,7 +49,7 @@ const AnimalDetailsPrams = ({ urlParam }) => {
                 ? <p>Loading...</p>
                 : animal
                     ? <AnimalItem animal={animal} />
-                    : <ErrorlItem animal={animal} error={error} />
+                    : <ErrorlItem urlParam={urlParam} error={error} />
             }
         </StyledAnimalDetailsPramsSection>
     )
@@ -68,19 +69,19 @@ const AnimalItem = ({ animal }) => {
                 <p>{animal.description}</p>
                 <img src={animal.asset.url.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com").replace("jfif", "jpg")} alt={animal.name} />
             </article>
-            <Link to="/animal-details">Se alle vores dyr i slider</Link>
+            <Link to="/vores-dyr">Se alle vores dyr i slider</Link>
         </>
 
     )
 }
 
 
-const ErrorlItem = ({ error }) => {
+const ErrorlItem = ({ urlParam, error }) => {
     return (
         <>
-            <h2 className="sub-title">Der er desværre ikke noget data </h2>
-            {error && <pre style={{ overflowX: "scroll", overflowY: "hidden" }}>{JSON.stringify(error, null, 2)}</pre>}
-
+            <h2 className="sub-title" style={{ textAlign: 'center' }}>{`Der er desværre ikke noget data med id: ${urlParam}`} </h2>
+            <AnimalSlider />
+            {/* {error && <pre style={{ overflowX: "scroll", overflowY: "hidden" }}>{JSON.stringify(error, null, 2)}</pre>} */}
         </>
     )
 }

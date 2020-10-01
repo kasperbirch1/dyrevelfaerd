@@ -1,8 +1,8 @@
 import React from 'react'
 import { Wrapper } from '../components/page-elements'
 import { Router } from "@reach/router"
-import AnimalSlider from "../components/AnimalSlider"
-import AnimalDetailsPrams from "../components/AnimalDetailsPrams"
+import AnimalSlider from "../DynamicRoutes/AnimalSlider"
+import AnimalDetailsPrams from "../DynamicRoutes/AnimalDetailsPrams"
 const AnimalDetails = () => {
     return (
         <Wrapper>
