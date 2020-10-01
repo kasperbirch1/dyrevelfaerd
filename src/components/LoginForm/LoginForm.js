@@ -1,6 +1,4 @@
 import React from 'react'
-// import { useSetRecoilState } from 'recoil';
-// import { loginState } from '../../Globalstates/Atoms'
 import axios from 'axios'
 import qs from 'querystring'
 import { useForm } from "react-hook-form";
@@ -11,7 +9,6 @@ const StyledLoginForm = styled.form`
 `
 
 const LoginForm = ({ setUserInfo, setLoading }) => {
-    // const setToggleLogin = useSetRecoilState(loginState);
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = async (data) => {
         console.log("data", data);
@@ -31,7 +28,6 @@ const LoginForm = ({ setUserInfo, setLoading }) => {
             console.log("response", response);
             setUserInfo({ token: response.data.token, username: data.username })
             setLoading(false);
-            // setToggleLogin(true)
         } catch (error) {
             console.error(error);
         }
@@ -55,23 +51,7 @@ const LoginForm = ({ setUserInfo, setLoading }) => {
                 })} />
             <span className="form-errors">{errors.username && errors.username.message}</span>
 
-            {/* <label htmlFor="email">Email eve.holt@reqres.in</label>
-            <input
-                type="email"
-                placeholder="Enter your email"
-                name="email"
-                ref={register({
-                    required: {
-                        value: true,
-                        message: "Email skal udfyldes"
-                    },
-                    pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: "invalid email address"
-                    }
-                })}
-            />
-            <span className="form-errors">{errors.email && errors.email.message} </span> */}
+
 
             <label htmlFor="password">Password cityslicka</label>
             <input

@@ -1,5 +1,6 @@
 import React from 'react'
 import useApi from '../../hooks/useApi'
+import { breakpoints } from '../../theme/breakpoints'
 import styled from 'styled-components'
 const StyledVolunteersSection = styled.section`
     background-color: var(--theme-background-color);
@@ -38,21 +39,30 @@ const StyledVolunteersSection = styled.section`
 }
 `
 
+const Containerwidtprops = styled.div`
+    display: grid;
+    grid-gap: 1rem;
+    @media ${breakpoints.md} {
+      grid-template-columns: repeat(${props => props.columns}, 1fr);
+      grid-column-gap: 2rem;
+      grid-row-gap: 0;
+    }
+`
+
 const Volunteers = () => {
     const [response, loading] = useApi("https://dyrevelfaerd.herokuapp.com/api/v1/volunteers")
-
     return (
         <StyledVolunteersSection id="Volunteers-Section" >
-            <div className="wrapper grid3column">
+            <Containerwidtprops columns={response && response.length} className="wrapper">
                 <h2 className="sub-title">Bliv Frivillig</h2>
                 {loading
                     ? <p>LOADING</p>
-                    : response && response.data.map(element => {
+                    : response && response.map(element => {
                         return (
                             <VolunteersItem key={element.id} title={element.title} content={element.content} extra={element.extra} img={element.asset.url} />
                         )
                     })}
-            </div>
+            </Containerwidtprops>
         </StyledVolunteersSection>
     )
 }

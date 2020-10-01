@@ -39,7 +39,6 @@ const AnimalDetailsPrams = ({ urlParam }) => {
         fetchSinglePost()
     }, [urlParam])
 
-    console.log("error LOG", error)
 
     // console.log("urlParam", urlParam);
     // console.log("animal", animal);

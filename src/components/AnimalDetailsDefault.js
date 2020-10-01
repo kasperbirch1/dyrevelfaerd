@@ -25,7 +25,7 @@ const StyledAnimalDetailsDefaultSection = styled.section`
 
 const AnimalDetailsDefault = () => {
     const [response, loading] = useApi("https://dyrevelfaerd.herokuapp.com/api/v1/animals")
-    console.log("tettte", response);
+    // console.log("response", response);
     const params = {
         rebuildOnUpdate: true,
         effect: 'coverflow',
@@ -50,15 +50,15 @@ const AnimalDetailsDefault = () => {
             <Swiper {...params} shouldSwiperUpdate>
                 {loading
                     ? <p>LOADING</p>
-                    : response && response.data.map(element => {
+                    : response && response.map(element => {
                         return (
-                            <Link to={`/animal-details/${element.id}`}>
+                            <Link key={element.id} to={`/animal-details/${element.id}`}>
                                 <img src={element.asset.url.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com").replace("jfif", "jpg")} alt={element.name} />
                             </Link>
                         )
                     })}
             </Swiper>
-            <h2 className="sub-title">Se aller vores dyr</h2>
+            <h2 className="sub-title">Se alle vores dyr</h2>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit, ullam. Veritatis nemo, vitae ex ab quod molestias voluptas omnis aspernatur exercitationem dicta tenetur possimus vero debitis ipsa dolorum similique eum?</p>
         </StyledAnimalDetailsDefaultSection >
 

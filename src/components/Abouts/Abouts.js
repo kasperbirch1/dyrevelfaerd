@@ -19,9 +19,10 @@ const Abouts = () => {
     const [response, loading] = useApi("https://dyrevelfaerd.herokuapp.com/api/v1/abouts")
     return (
         <StyledAboutsSection className="wrapper grid3column" id="Abouts-Section">
+            <h2 className="sub-title">om os</h2>
             {loading
                 ? <p>LOADING</p>
-                : response && response.data.map(element => {
+                : response && response.map(element => {
                     return (
                         <AboutItem key={element.id} title={element.title} content={element.content} />
                     )
