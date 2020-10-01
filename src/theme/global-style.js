@@ -144,17 +144,22 @@ export const GlobalStyle = createGlobalStyle`
 
   .grid3column {
     display: grid;
-    grid-gap: 1rem;
+    grid-column-gap: 1rem;
     @media ${breakpoints.md} {
       grid-template-columns: repeat(3, 1fr);
-      grid-gap: 2rem;
+      grid-column-gap: 2rem;
     }
   }
 
   .sub-title {
+    font-weight: bold;
     font-size: 2rem;
     grid-column: 1/-1;
     color: var(--theme-color);
+    margin-bottom: 1.5rem;
+    :first-letter {
+      text-transform: uppercase;
+    }
   }
 
   .ReactModal__Overlay{
