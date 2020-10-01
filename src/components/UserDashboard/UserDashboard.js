@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { loginState } from '../../Globalstates/Atoms'
 import { Link } from 'gatsby'
 import axios from 'axios'
 import qs from 'querystring'
@@ -35,7 +33,6 @@ const UserDashboard = ({ UserInfo }) => {
     // });
 
     const [responseData, setResponseData] = useState(null)
-    const [, setLoginStateValue] = useRecoilState(loginState);
     const { register, handleSubmit, errors } = useForm();
     // console.log("UserInfo.token", UserInfo.token);
 
@@ -77,7 +74,6 @@ const UserDashboard = ({ UserInfo }) => {
 
     const handleLogout = (e) => {
         window.sessionStorage.removeItem("UserInfo");
-        setLoginStateValue(false)
     }
 
     return (
