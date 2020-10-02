@@ -13,6 +13,7 @@ const StyledAnimalSliderSection = styled.section`
 .swiper-container {
     margin: 2rem 0;
     max-width: 100vw;
+    max-height: 10rem;
 }
 .swiper-slide {
     width: 10rem;

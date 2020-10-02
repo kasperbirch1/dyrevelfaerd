@@ -1,38 +1,23 @@
-import React, { useState } from 'react'
-import { Link } from 'gatsby'
-import axios from 'axios'
-import qs from 'querystring'
+import React, { useState } from 'react';
+import axios from 'axios';
+import qs from 'querystring';
 import { useForm } from "react-hook-form";
-import styled from 'styled-components'
-const StyledUserDashboardSection = styled.section`
-    .Logout-btn,
-    .form-errors {
-        color: red;
-    }
-   form {
-       display: grid;
-       grid-gap: .5rem;
-   }
-`
 
-
-
-const UserDashboard = ({ UserInfo }) => {
+export const AddAnimals = ({ style, UserInfo }) => {
     const types = ['image/png', 'image/jpeg'];
     const checkExtension = (file) => {
         if (types.includes(file.type)) {
             return "Det skal være png eller jpeg";
         }
-    }
+    };
 
 
-    const [responseData, setResponseData] = useState(null)
+    const [responseData, setResponseData] = useState(null);
     const { register, handleSubmit, errors } = useForm();
     // console.log("UserInfo.token", UserInfo.token);
-
     const onSubmit = async (data) => {
-        const formData = new FormData()
-        formData.append("file", data.picture[0])
+        const formData = new FormData();
+        formData.append("file", data.picture[0]);
         try {
             console.log("data", data);
             const UploadImagesResponse = await axios.post(
@@ -43,7 +28,7 @@ const UserDashboard = ({ UserInfo }) => {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': `Bearer ${UserInfo.token}`
                     },
-                })
+                });
             console.log("her er AssetId", UploadImagesResponse);
             const response = await axios.post(
                 'https://dyrevelfaerd.herokuapp.com/api/v1/animals',
@@ -58,29 +43,16 @@ const UserDashboard = ({ UserInfo }) => {
                         'Content-Type': 'application/x-www-form-urlencoded',
                         'Authorization': `Bearer ${UserInfo.token}`
                     }
-                })
+                });
             console.log("response", response);
-            setResponseData(response)
+            setResponseData(response);
         } catch (error) {
             console.error(error);
         }
-    }
-
-    const handleLogout = (e) => {
-        window.sessionStorage.removeItem("UserInfo");
-    }
-
+    };
     return (
-        <StyledUserDashboardSection>
-            <h1>Du er logget ind med: {UserInfo.username}</h1>
-            <p>{`Token: ${UserInfo.token}`}</p>
-            <Link to="/" className="Logout-btn" onClick={handleLogout}>Log out</Link>
-            <br></br>
-            <pre>{JSON.stringify(UserInfo.data, null, 2)}</pre>
-            <br></br>
+        <section style={style}>
             <h2>Opret Animal</h2>
-            <br></br>
-
             <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="name">Name</label>
                 <input
@@ -118,8 +90,7 @@ const UserDashboard = ({ UserInfo }) => {
                             value: true,
                             message: "age skal udfyldes",
                         },
-                    })}
-                />
+                    })} />
                 <span className="form-errors">{errors.age && errors.age.message}</span>
 
                 <input
@@ -131,7 +102,6 @@ const UserDashboard = ({ UserInfo }) => {
                             message: "file skal udfyldes",
                         },
                         validate: checkExtension
-
                     }
                     )} />
                 <span className="form-errors">{errors.picture && errors.picture.message}</span>
@@ -140,12 +110,7 @@ const UserDashboard = ({ UserInfo }) => {
                 <input type="submit" />
             </form>
             {responseData &&
-                <pre>{JSON.stringify(responseData, null, 2)}</pre>
-            }
-        </StyledUserDashboardSection>
-    )
-}
-
-export default UserDashboard
-
-
+                <pre>{JSON.stringify(responseData, null, 2)}</pre>}
+        </section>
+    );
+};

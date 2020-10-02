@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import useSessionStorage from '../hooks/useSessionStorage'
 import Loading from '../components/Loading'
 import LoginForm from '../components/LoginForm/LoginForm'
-import UserDashboard from '../components/UserDashboard/UserDashboard'
+import UserDashboard from '../components/UserDashboard'
 
 const Login = () => {
   const [UserInfo, setUserInfo] = useSessionStorage("UserInfo");
