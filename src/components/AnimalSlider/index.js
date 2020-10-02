@@ -1,19 +1,25 @@
 import React from "react"
 import { Link } from 'gatsby'
-import useApi from '../hooks/useApi'
+import useApi from '../../hooks/useApi'
 import Swiper from 'react-id-swiper';
-import '../theme/swiper.min.css';
+import Loading from '../Loading'
+import './swiper.min.css';
+import { breakpoints } from '../../theme/breakpoints'
 import styled from 'styled-components';
-const StyledAnimalDetailsDefaultSection = styled.section`
+const StyledAnimalSliderSection = styled.section`
 .sub-title {
     margin: 2rem 0 1rem;
 }
 .swiper-container {
-    margin-top: 3rem;
+    margin: 2rem 0;
     max-width: 100vw;
 }
 .swiper-slide {
-    width: 20rem;
+    width: 10rem;
+    @media ${breakpoints.md} {
+        width: 20rem;
+    }
+
     img {
         height: 100%;
         width: 100%;
@@ -23,10 +29,11 @@ const StyledAnimalDetailsDefaultSection = styled.section`
 }
 `
 
-const AnimalDetailsDefault = () => {
+const AnimalSlider = ({ id = 2 }) => {
     const [response, loading] = useApi("https://dyrevelfaerd.herokuapp.com/api/v1/animals")
     // console.log("response", response);
     const params = {
+        initialSlide: (id - 1),
         rebuildOnUpdate: true,
         effect: 'coverflow',
         grabCursor: true,
@@ -46,10 +53,10 @@ const AnimalDetailsDefault = () => {
     }
     return (
 
-        <StyledAnimalDetailsDefaultSection>
+        <StyledAnimalSliderSection>
             <Swiper {...params} shouldSwiperUpdate>
                 {loading
-                    ? <p>LOADING</p>
+                    ? <Loading />
                     : response && response.map(element => {
                         return (
                             <Link key={element.id} to={`/vores-dyr/${element.id}`}>
@@ -58,11 +65,9 @@ const AnimalDetailsDefault = () => {
                         )
                     })}
             </Swiper>
-            <h2 className="sub-title">Se alle vores dyr</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit, ullam. Veritatis nemo, vitae ex ab quod molestias voluptas omnis aspernatur exercitationem dicta tenetur possimus vero debitis ipsa dolorum similique eum?</p>
-        </StyledAnimalDetailsDefaultSection >
+        </StyledAnimalSliderSection >
 
     )
 }
 
-export default AnimalDetailsDefault
+export default AnimalSlider

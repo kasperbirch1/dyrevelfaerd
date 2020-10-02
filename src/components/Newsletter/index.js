@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { navigate } from 'gatsby'
 import axios from 'axios'
 import qs from 'querystring'
@@ -34,8 +34,8 @@ const StyledNewsletterSection = styled.section`
            }
        }
        .form-errors {
-           align-self: center;
-           padding-left: .5rem;
+           /* align-self: center; */
+           /* padding-left: .5rem; */
        }
        button {
             border-radius: .25rem;
@@ -52,10 +52,12 @@ const StyledNewsletterSection = styled.section`
 `
 
 const Newsletter = () => {
+    const [Error, setError] = useState(null)
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = async (data) => {
         console.log("data", data);
         try {
+            setError(null)
             const response = await axios.post(
                 'https://dyrevelfaerd.herokuapp.com/api/v1/subscribers',
                 qs.stringify({
@@ -71,7 +73,7 @@ const Newsletter = () => {
             navigate('/nyhedsbrev-tak-for-din-tilmelding');
         } catch (error) {
             console.error(error);
-
+            setError(error)
         }
     }
     return (
@@ -114,11 +116,14 @@ const Newsletter = () => {
                                 }
                             })} />
                     </label>
-                    <span className="form-errors">{errors.email && errors.email.message || errors.name && errors.name.message}</span>
-
+                    <div className="error-container">
+                        {Error &&
+                            <p className="form-errors">Du kan ikke tilmelde den sammen mail flere gange</p>
+                        }
+                        <p className="form-errors">{errors.email && errors.email.message || errors.name && errors.name.message} </p>
+                    </div>
 
                     <button type="submit">Tilmeld</button>
-
                 </form>
             </div>
 

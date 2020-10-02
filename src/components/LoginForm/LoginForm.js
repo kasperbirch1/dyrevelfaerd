@@ -39,6 +39,7 @@ const LoginForm = ({ setUserInfo, setLoading }) => {
             <input
                 type="text"
                 name="username"
+                placeholder="Enter your username"
                 ref={register({
                     required: {
                         value: true,
@@ -53,7 +54,7 @@ const LoginForm = ({ setUserInfo, setLoading }) => {
 
 
 
-            <label htmlFor="password">Password cityslicka</label>
+            <label htmlFor="password">Password</label>
             <input
                 type="password"
                 placeholder="Enter your password"

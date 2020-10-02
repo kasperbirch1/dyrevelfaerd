@@ -21,10 +21,10 @@ Første dag er gået godt, jeg har læst opgaven igemmen, hostet til Heroku, ops
 idag har jeg skiftet placeholder-data ud med data der kommer fra api ved at lave mit eget react-hook (useApi.js), details site, login fomular der videre sender mig til en anden fumular der kan tilføje et nyt dyr, lavet slider med link til details
 
 1. Dag<br>
-Pagination, styledcomponet med props, 
+Pagination, styled component med props, moments, media query, 
 
 1. Dag<br>
-hej dag 4
+Loading component
 
 1. Dag<br>
 hej dag 5

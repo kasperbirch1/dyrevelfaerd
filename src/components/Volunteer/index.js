@@ -1,6 +1,7 @@
 import React from 'react'
 import useApi from '../../hooks/useApi'
 import { breakpoints } from '../../theme/breakpoints'
+import Loading from '../Loading'
 import styled from 'styled-components'
 const StyledVolunteersSection = styled.section`
     background-color: var(--theme-background-color);
@@ -56,7 +57,7 @@ const Volunteers = () => {
             <Containerwidtprops columns={response && response.length} className="wrapper">
                 <h2 className="sub-title">Bliv Frivillig</h2>
                 {loading
-                    ? <p>LOADING</p>
+                    ? <Loading />
                     : response && response.map(element => {
                         return (
                             <VolunteersItem key={element.id} title={element.title} content={element.content} extra={element.extra} img={element.asset.url} />

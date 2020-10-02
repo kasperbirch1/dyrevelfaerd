@@ -1,5 +1,5 @@
 import React from 'react'
-import DeleteSubscribers from '../components/DeleteSubscribers/DeleteSubscribers'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 const StyledSection = styled.section`
     display: grid;
@@ -16,7 +16,8 @@ const nyhedsbrev = () => {
         <>
             <StyledSection className="wrapper">
                 <h2 className="sub-title">tak for din tilmelding</h2>
-                <DeleteSubscribers />
+
+                <Link to="/afmeld-nyhedsbrev">Her kan du afmelde nyhedsbrev</Link>
             </StyledSection>
         </>
     )

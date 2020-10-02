@@ -41,8 +41,7 @@ export const CurrentAnimails = ({ currentPosts }) => {
     return (
         <>
             {currentPosts.map(element => {
-                console.log("element", element);
-                console.log("now", new Date());
+                // console.log("element", element);
                 return (
                     <Link key={element.id} to={`/vores-dyr/${element.id}`}>
                         <SyledArticle>

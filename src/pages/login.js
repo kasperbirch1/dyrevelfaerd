@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import useSessionStorage from '../hooks/useSessionStorage'
-import { Wrapper } from '../components/page-elements'
+import Loading from '../components/Loading'
 import LoginForm from '../components/LoginForm/LoginForm'
 import UserDashboard from '../components/UserDashboard/UserDashboard'
 
 const Login = () => {
   const [UserInfo, setUserInfo] = useSessionStorage("UserInfo");
-  const [Loading, setLoading] = useState(false)
+  const [LoadingStatus, setLoadingStatus] = useState(false)
   // console.log("UserInfo", UserInfo);
 
   return (
-    <Wrapper>
+    <section className="wrapper">
       { UserInfo
         ? <UserDashboard UserInfo={UserInfo} />
-        : Loading
-          ? <p>loading........</p>
-          : <LoginForm setUserInfo={setUserInfo} setLoading={setLoading} />
+        : LoadingStatus
+          ? <Loading />
+          : <LoginForm setUserInfo={setUserInfo} setLoading={setLoadingStatus} />
       }
-    </Wrapper>
+    </section>
   )
 }
 

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react"
-import AnimalSlider from './AnimalSlider'
-import { Link } from 'gatsby'
+import AnimalSlider from '../components/AnimalSlider'
+import Loading from '../components/Loading'
 import axios from 'axios';
 import styled from 'styled-components'
 const StyledAnimalDetailsPramsSection = styled.section`
-    padding: 1rem;
     article {
         h2 {
             font-weight: bold;
@@ -15,6 +14,11 @@ const StyledAnimalDetailsPramsSection = styled.section`
            margin-bottom: 1rem;
 
         }
+    }
+
+    .sub-title {
+        margin-top: 3rem;
+        margin-bottom: 1rem;
     }
 `
 
@@ -46,7 +50,7 @@ const AnimalDetailsPrams = ({ urlParam }) => {
     return (
         <StyledAnimalDetailsPramsSection>
             {loading
-                ? <p>Loading...</p>
+                ? <Loading />
                 : animal
                     ? <AnimalItem animal={animal} />
                     : <ErrorlItem urlParam={urlParam} error={error} />
@@ -69,7 +73,8 @@ const AnimalItem = ({ animal }) => {
                 <p>{animal.description}</p>
                 <img src={animal.asset.url.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com").replace("jfif", "jpg")} alt={animal.name} />
             </article>
-            <Link to="/vores-dyr">Se alle vores dyr i slider</Link>
+            <h3 className="sub-title">Se vores andre dyr her</h3>
+            <AnimalSlider id={animal.id} />
         </>
 
     )

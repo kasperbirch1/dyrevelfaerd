@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
+import Loading from '../Loading'
 import Pagination from './Pagination'
 import { breakpoints } from '../../theme/breakpoints'
 import { CurrentAnimails } from './CurrentAnimails';
@@ -57,7 +58,7 @@ const Animals = () => {
                 <p>{`${posts.length} dyr`}</p>
             </div>
             {loading
-                ? <p>LOADING</p>
+                ? <Loading />
                 : <>
                     <CurrentAnimails currentPosts={currentPosts} totalPosts={posts.length} />
                     <Pagination

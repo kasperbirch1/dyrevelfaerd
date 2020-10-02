@@ -3,11 +3,10 @@ import { Link } from 'gatsby'
 import axios from 'axios'
 import qs from 'querystring'
 import { useForm } from "react-hook-form";
-// import * as yup from 'yup';
-// import { yupResolver } from "@hookform/resolvers";
 import styled from 'styled-components'
 const StyledUserDashboardSection = styled.section`
-    .Logout-btn {
+    .Logout-btn,
+    .form-errors {
         color: red;
     }
    form {
@@ -15,22 +14,17 @@ const StyledUserDashboardSection = styled.section`
        grid-gap: .5rem;
    }
 `
-// { resolver: yupResolver(schema), }
+
 
 
 const UserDashboard = ({ UserInfo }) => {
-    // const imagesTypes = ['image/png', 'image/jpeg'];
-    // const schema = yup.object().shape({
-    //     picture: yup
-    //         .mixed()
-    //         .required("You need to provide a file")
-    //         .test("type", "We only support jpeg or png", (value) => {
-    //             return value && imagesTypes.includes(value[0].type);
-    //         })
-    //         .test("fileSize", "The file is too large", (value) => {
-    //             return value && value[0].size <= 2000000;
-    //         }),
-    // });
+    const types = ['image/png', 'image/jpeg'];
+    const checkExtension = (file) => {
+        if (types.includes(file.type)) {
+            return "Det skal være png eller jpeg";
+        }
+    }
+
 
     const [responseData, setResponseData] = useState(null)
     const { register, handleSubmit, errors } = useForm();
@@ -128,11 +122,21 @@ const UserDashboard = ({ UserInfo }) => {
                 />
                 <span className="form-errors">{errors.age && errors.age.message}</span>
 
-                <input type="file" name="picture" ref={register} />
+                <input
+                    type="file"
+                    name="picture"
+                    ref={register({
+                        required: {
+                            value: true,
+                            message: "file skal udfyldes",
+                        },
+                        validate: checkExtension
+
+                    }
+                    )} />
                 <span className="form-errors">{errors.picture && errors.picture.message}</span>
 
-
-
+                {console.log("errors", errors)}
                 <input type="submit" />
             </form>
             {responseData &&

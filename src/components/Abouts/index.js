@@ -1,5 +1,6 @@
 import React from 'react'
 import useApi from '../../hooks/useApi'
+import Loading from '../Loading'
 import styled from 'styled-components'
 const StyledAboutsSection = styled.section`
     padding: var(--section-padding);
@@ -21,7 +22,7 @@ const Abouts = () => {
         <StyledAboutsSection className="wrapper grid3column" id="Abouts-Section">
             <h2 className="sub-title">om os</h2>
             {loading
-                ? <p>LOADING</p>
+                ? <Loading />
                 : response && response.map(element => {
                     return (
                         <AboutItem key={element.id} title={element.title} content={element.content} />

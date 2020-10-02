@@ -1,5 +1,6 @@
 import React from 'react'
 import useApi from '../../hooks/useApi'
+import Loading from '../Loading'
 import styled from 'styled-components'
 import { breakpoints } from '../../theme/breakpoints'
 const StyledBannerSection = styled.section`
@@ -34,9 +35,8 @@ const Banner = ({ fetchID, navID }) => {
         <>
             {
                 loading
-                    ? <p>LOADING</p>
-                    :
-                    <StyledBannerSection style={{ backgroundImage: `url(${response && response.asset.url.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com")})` }} id={navID && navID}>
+                    ? <Loading />
+                    : <StyledBannerSection style={{ backgroundImage: `url(${response && response.asset.url.replace("http://localhost:4000", "https://dyrevelfaerd.herokuapp.com")})` }} id={navID && navID}>
                         <article className="wrapper">
                             <h3>{response && response.title}</h3>
                             <p>{response && response.content}</p>
