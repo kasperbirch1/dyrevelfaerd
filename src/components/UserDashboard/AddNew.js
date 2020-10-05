@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { navigate } from 'gatsby'
 import axios from 'axios';
 import qs from 'querystring';
 import { useForm } from "react-hook-form";
@@ -32,34 +33,51 @@ const AddNew = ({ response, resourceType, UserInfo }) => {
     const onSubmit = async (data) => {
         console.log("data", data);
         try {
-            const formData = new FormData();
-            formData.append("file", data.picture[0]);
-            const UploadImagesResponse = await axios.post(
-                "https://dyrevelfaerd.herokuapp.com/api/v1/assets",
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Authorization': `Bearer ${UserInfo.token}`
-                    },
-                });
+            if (data.picture) {
+                const formData = new FormData();
+                formData.append("file", data.picture[0]);
+                const UploadImagesResponse = await axios.post(
+                    "https://dyrevelfaerd.herokuapp.com/api/v1/assets",
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Authorization': `Bearer ${UserInfo.token}`
+                        },
+                    });
 
-            const response = await axios.post(
-                `https://dyrevelfaerd.herokuapp.com/api/v1${resourceType}`,
-                qs.stringify({
-                    ...data,
-                    assetId: UploadImagesResponse.data.id
-                }),
-                {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': `Bearer ${UserInfo.token}`
-                    }
-                });
-            console.log("response", response);
-            alert("sucess")
+                const response = await axios.post(
+                    `https://dyrevelfaerd.herokuapp.com/api/v1${resourceType}`,
+                    qs.stringify({
+                        ...data,
+                        assetId: UploadImagesResponse.data.id
+                    }),
+                    {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization': `Bearer ${UserInfo.token}`
+                        }
+                    });
+                console.log("response", response);
+                alert("sucess")
+                navigate('/login');
+            } else {
+                const response = await axios.post(
+                    `https://dyrevelfaerd.herokuapp.com/api/v1${resourceType}`,
+                    qs.stringify(data),
+                    {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization': `Bearer ${UserInfo.token}`
+                        }
+                    });
+                console.log("response", response);
+                alert("sucess")
+                navigate('/login');
+            }
+
         } catch (error) {
-            alert(error)
+            console.error(error);
         }
     }
 
