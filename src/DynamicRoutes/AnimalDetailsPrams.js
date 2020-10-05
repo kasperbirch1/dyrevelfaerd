@@ -3,6 +3,7 @@ import AnimalSlider from '../components/AnimalSlider'
 import Loading from '../components/Loading'
 import axios from 'axios';
 import styled from 'styled-components'
+import SEO from '../components/seo'
 const StyledAnimalDetailsPramsSection = styled.section`
     article {
         h2 {
@@ -68,6 +69,7 @@ export default AnimalDetailsPrams
 const AnimalItem = ({ animal }) => {
     return (
         <>
+            <SEO title={animal.name} />
             <article>
                 <h2 className="sub-title">{`${animal.name}, ${animal.age} år.`}</h2>
                 <p>{animal.description}</p>
