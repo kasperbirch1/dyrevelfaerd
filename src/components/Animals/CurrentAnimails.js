@@ -49,7 +49,7 @@ export const CurrentAnimails = ({ currentPosts }) => {
                             <div>
                                 <h3>{element.name}</h3>
                                 <p>{element.description}</p>
-                                <p>{moment(element.updatedAt.slice(0, 10), "YYYY-MM-DD").fromNow()}</p>
+                                <p>{moment(element.createdAt.slice(0, 10), "YYYY-MM-DD").fromNow()}</p>
                             </div>
                         </SyledArticle>
                     </Link>
