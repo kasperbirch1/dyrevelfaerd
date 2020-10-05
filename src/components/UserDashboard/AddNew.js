@@ -4,13 +4,16 @@ import qs from 'querystring';
 import { useForm } from "react-hook-form";
 import styled from 'styled-components'
 const StyledAddNewSection = styled.section`
-padding: .25rem;
-border: 2px solid green;
+margin-bottom: 1rem;
 form,fieldset { 
     display: grid;
     input {
         width: 100%;
     }
+}
+form {
+padding: .25rem;
+    border: 5px solid green;
 }
 
 `
@@ -62,7 +65,7 @@ const AddNew = ({ response, resourceType, UserInfo }) => {
 
     return (
         <StyledAddNewSection>
-            <h3 className="sub-title">Add New</h3>
+            <h3 className="sub-title">Add New {resourceType}</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {response && Object.keys(response[0]).filter(el => contentTypes.includes(el)).map((ObjectElenemt, index) => {
                     return (
@@ -81,19 +84,20 @@ const AddNew = ({ response, resourceType, UserInfo }) => {
                         </fieldset>
                     );
                 })}
-                <label htmlFor="picture">picture</label>
-                <input
-                    type="file"
-                    name="picture"
-                    ref={register({
-                        required: {
-                            value: true,
-                            message: "file skal udfyldes",
-                        },
-                        validate: checkExtension
-                    })} />
+                {response && response[0].assetId && <>
+                    <label htmlFor="picture">picture</label>
+                    <input
+                        type="file"
+                        name="picture"
+                        ref={register({
+                            required: {
+                                value: true,
+                                message: "file skal udfyldes",
+                            },
+                            validate: checkExtension
+                        })} />
+                </>}
                 <button type="submit">create new</button>
-
             </form>
 
         </StyledAddNewSection>

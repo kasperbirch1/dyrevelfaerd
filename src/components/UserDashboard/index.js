@@ -50,7 +50,6 @@ const UserDashboard = ({ UserInfo }) => {
                 <button onClick={() => { setResourceType("/adoptsections") }}>adoptsections</button>
                 <button onClick={() => { setResourceType("/abouts") }}>abouts</button>
                 <button onClick={() => { setResourceType("/animals") }}>animals</button>
-                <button onClick={() => { setResourceType("/assets") }}>assets</button>
                 <button onClick={() => { setResourceType("/volunteers") }}>volunteers</button>
             </div>
             <h4 style={{ gridArea: 'headline' }} className="sub-title">{resourceType}</h4>

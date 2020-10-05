@@ -6,6 +6,8 @@ const StyledFooter = styled.footer`
       background-color: var(--theme-background-color);
       section {
         padding: var(--section-padding);
+        display: grid; 
+        grid-gap: 1rem;
         h5 {
             font-size: 1rem;
             text-transform: uppercase;
@@ -18,11 +20,9 @@ const StyledFooter = styled.footer`
             color: var(--link-color-blue);
         }
         @media ${breakpoints.md} {
-            display: grid;  
             grid-template-columns: repeat(2, 1fr);
-            
             .partners {
-                margin-left: 10rem;
+                justify-self: flex-end;
             }
             .copyright {
                 grid-column: 1/-1;

@@ -18,20 +18,10 @@ export const GlobalStyle = createGlobalStyle`
     --wrapper-max-size: 1000px;
     --link-color: #afadba;
     --header-background-color: rgba(255,255,255, .5);
-
-
     --text-color: black;
     --menu-text-color: black;
     --background-color: white;
     --menu-icon-size: 2rem;
-  }
-
-  [data-theme="dark"] {
-    --theme-color: green;
-    --text-color: white;
-    --menu-text-color: black;
-    --background-color: black;
-    --header-background-color: rgba(255,255,255, .95);
   }
 
   *, *:before, *:after {

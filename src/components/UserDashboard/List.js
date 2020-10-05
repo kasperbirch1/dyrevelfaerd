@@ -30,16 +30,19 @@ export const List = ({ response, resourceType, UserInfo }) => {
     };
 
     return (
-        <StyledListUl>
-            {response && response.map((element, index) => {
-                return (
-                    <li key={index} >
-                        <DynamicForm element={element} resourceType={resourceType} UserInfo={UserInfo} />
-                        <button className="remove-btn" onClick={() => { deleteItem(element.id); }}>{`delete: ${resourceType}/${element.id}`}</button>
-                        <pre style={{ overflow: 'scroll', maxWidth: '100%' }}>{JSON.stringify(element, null, 2)}</pre>
-                    </li>
-                );
-            })}
-        </StyledListUl>
+        <>
+            <h3 className="sub-title">Edit {resourceType}</h3>
+            <StyledListUl>
+                {response && response.map((element, index) => {
+                    return (
+                        <li key={index} >
+                            <DynamicForm element={element} resourceType={resourceType} UserInfo={UserInfo} />
+                            <button className="remove-btn" onClick={() => { deleteItem(element.id); }}>{`delete: ${resourceType}/${element.id}`}</button>
+                            <pre style={{ overflow: 'scroll', maxWidth: '100%' }}>{JSON.stringify(element, null, 2)}</pre>
+                        </li>
+                    );
+                })}
+            </StyledListUl>
+        </>
     );
 };
