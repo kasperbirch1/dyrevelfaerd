@@ -11,7 +11,6 @@ const StyledLoginForm = styled.form`
 const LoginForm = ({ setUserInfo, setLoading }) => {
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = async (data) => {
-        console.log("data", data);
         try {
             setLoading(true);
             const response = await axios.post(
@@ -25,7 +24,7 @@ const LoginForm = ({ setUserInfo, setLoading }) => {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 })
-            console.log("response", response);
+            // console.log("response", response);
             setUserInfo({ token: response.data.token, username: data.username })
             setLoading(false);
         } catch (error) {

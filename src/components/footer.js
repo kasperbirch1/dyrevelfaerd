@@ -7,9 +7,9 @@ const StyledFooter = styled.footer`
       section {
         padding: var(--section-padding);
         h5 {
-            font-size: 1.25rem;
+            font-size: 1rem;
             text-transform: uppercase;
-            font-weight: 600;
+            font-weight: bold;
             margin-bottom: .5rem;
         }
         a {

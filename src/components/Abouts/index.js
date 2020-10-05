@@ -17,7 +17,7 @@ const StyledAboutsSection = styled.section`
 `
 
 const Abouts = () => {
-    const [response, loading] = useApi("https://dyrevelfaerd.herokuapp.com/api/v1/abouts")
+    const [response, loading] = useApi("/abouts")
     return (
         <StyledAboutsSection className="wrapper grid3column" id="Abouts-Section">
             <h2 className="sub-title">om os</h2>

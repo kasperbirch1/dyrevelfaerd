@@ -9,9 +9,10 @@ const StyledEditAnimalsSection = styled.section`
 `
 
 const EditAnimals = ({ UserInfo }) => {
-    const [response] = useApi("https://dyrevelfaerd.herokuapp.com/api/v1/animals");
+    const [response] = useApi("/animals");
     const [CurentAnimalID, setCurentAnimalID] = useState(1)
     const [CurentAnimal, setCurentAnimal] = useState(null)
+    // const [CurentAnimalImg, setCurentAnimalImg] = useState(null)
     // console.log("response", response);
     console.log("CurentAnimal", CurentAnimal);
 
@@ -27,38 +28,61 @@ const EditAnimals = ({ UserInfo }) => {
         fetchApi()
     }, [CurentAnimalID])
 
+    const deleteAnimal = (CurentAnimalID) => {
+        axios.delete(`https://dyrevelfaerd.herokuapp.com/api/v1/animals/${CurentAnimalID}`,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${UserInfo.token}`
+                },
+            });
+        console.log("slettet", CurentAnimalID);
+    };
+
     const { register, handleSubmit, errors } = useForm();
     const [responseData, setResponseData] = useState("responseData");
     const types = ['image/png', 'image/jpeg'];
     const checkExtension = (file) => {
-        if (types.includes(file.type)) {
+        if (!types.includes(file.type)) {
             return "Det skal være png eller jpeg";
         }
     };
     const onSubmit = async (data) => {
-        console.log("data", data);
+        console.log("data", data.picture.length === 0);
         try {
-            // if (data.picture.length === 0) {
-            //     const formData = new FormData();
-            //     formData.append("file", data.picture[0]);
-            //     const UploadImagesResponse = await axios.put(`https://dyrevelfaerd.herokuapp.com/api/v1/assets/${CurentAnimal.asset.id}`,
-            //         formData,
-            //         {
-            //             headers: {
-            //                 'Content-Type': 'multipart/form-data',
-            //                 'Authorization': `Bearer ${UserInfo.token}`
-            //             },
-            //         });
-            //     console.log("her er AssetId", UploadImagesResponse);
-            // }
-
+            if (data.picture.length !== 0) {
+                const formData = new FormData();
+                formData.append("file", data.picture[0]);
+                const UploadImagesResponse = await axios.post(`https://dyrevelfaerd.herokuapp.com/api/v1/assets`,
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Authorization': `Bearer ${UserInfo.token}`
+                        },
+                    });
+                console.log("her er AssetId", UploadImagesResponse.data.id);
+                const response = await axios.put(`https://dyrevelfaerd.herokuapp.com/api/v1/animals/${CurentAnimalID}`,
+                    qs.stringify({
+                        name: data.name,
+                        description: data.description,
+                        age: data.age,
+                        assetId: UploadImagesResponse.data.id,
+                    }),
+                    {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization': `Bearer ${UserInfo.token}`
+                        }
+                    });
+                console.log("response picture", response);
+            }
 
             const response = await axios.put(`https://dyrevelfaerd.herokuapp.com/api/v1/animals/${CurentAnimalID}`,
                 qs.stringify({
+                    age: data.age,
                     name: data.name,
                     description: data.description,
-                    age: data.age,
-                    // assetId: UploadImagesResponse.data.id || CurentAnimal.asset.id,
                     assetId: CurentAnimal.asset.id,
                 }),
                 {
@@ -68,6 +92,8 @@ const EditAnimals = ({ UserInfo }) => {
                     }
                 });
             console.log("response", response);
+
+
             setResponseData(response);
         } catch (error) {
             console.error(error);
@@ -79,10 +105,12 @@ const EditAnimals = ({ UserInfo }) => {
 
     return (
         <StyledEditAnimalsSection>
+            <h2 className="sub-title">Redigere Animal</h2>
+
             <select onChange={e => setCurentAnimalID(e.target.value)}>
                 {response && response.map(element => (<option key={element.id} value={element.id}>{element.name}</option>))}
             </select>
-            <h1>hej</h1>
+            <button style={{ margin: '1rem 0', color: 'red' }} onClick={e => deleteAnimal(CurentAnimal.id)}>delete</button>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="name">Name</label>
                 <input
@@ -105,15 +133,15 @@ const EditAnimals = ({ UserInfo }) => {
                     placeholder="age"
                     name="age"
                     ref={register()} />
-                {/* <input
-                    defaultValue={CurentAnimal && CurentAnimal.asset.url}
+                <input
+                    // defaultValue={CurentAnimal && CurentAnimal.asset.url}
                     type="file"
                     name="picture"
                     ref={register({
                         validate: checkExtension
                     }
                     )} />
-                <span className="form-errors">{errors.picture && errors.picture.message}</span> */}
+                <span className="form-errors">{errors.picture && errors.picture.message}</span>
 
                 {console.log("errors", errors)}
                 <input type="submit" />

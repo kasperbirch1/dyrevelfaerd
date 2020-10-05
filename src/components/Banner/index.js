@@ -30,7 +30,7 @@ const StyledBannerSection = styled.section`
 `
 
 const Banner = ({ fetchID, navID }) => {
-    const [response, loading] = useApi(`https://dyrevelfaerd.herokuapp.com/api/v1/adoptsections/${fetchID}`)
+    const [response, loading] = useApi(`/adoptsections/${fetchID}`)
     return (
         <>
             {

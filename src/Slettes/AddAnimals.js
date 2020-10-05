@@ -3,10 +3,12 @@ import axios from 'axios';
 import qs from 'querystring';
 import { useForm } from "react-hook-form";
 
+// import useUploadImage from '../../hooks/useUploadImage'
+
 export const AddAnimals = ({ style, UserInfo }) => {
     const types = ['image/png', 'image/jpeg'];
     const checkExtension = (file) => {
-        if (types.includes(file.type)) {
+        if (!types.includes(file.type)) {
             return "Det skal være png eller jpeg";
         }
     };
@@ -16,9 +18,9 @@ export const AddAnimals = ({ style, UserInfo }) => {
     const { register, handleSubmit, errors } = useForm();
     // console.log("UserInfo.token", UserInfo.token);
     const onSubmit = async (data) => {
-        const formData = new FormData();
-        formData.append("file", data.picture[0]);
         try {
+            const formData = new FormData();
+            formData.append("file", data.picture[0]);
             console.log("data", data);
             const UploadImagesResponse = await axios.post(
                 "https://dyrevelfaerd.herokuapp.com/api/v1/assets",
@@ -29,7 +31,7 @@ export const AddAnimals = ({ style, UserInfo }) => {
                         'Authorization': `Bearer ${UserInfo.token}`
                     },
                 });
-            console.log("her er AssetId", UploadImagesResponse);
+
             const response = await axios.post(
                 'https://dyrevelfaerd.herokuapp.com/api/v1/animals',
                 qs.stringify({
@@ -52,7 +54,7 @@ export const AddAnimals = ({ style, UserInfo }) => {
     };
     return (
         <section style={style}>
-            <h2>Opret Animal</h2>
+            <h2 className="sub-title">Opret Animal</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="name">Name</label>
                 <input
@@ -93,6 +95,7 @@ export const AddAnimals = ({ style, UserInfo }) => {
                     })} />
                 <span className="form-errors">{errors.age && errors.age.message}</span>
 
+                <label htmlFor="picture">picture</label>
                 <input
                     type="file"
                     name="picture"

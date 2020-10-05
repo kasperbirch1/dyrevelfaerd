@@ -30,7 +30,7 @@ const StyledAnimalSliderSection = styled.section`
 }
 `
 
-const AnimalSlider = ({ id = 2 }) => {
+const AnimalSlider = ({ id = 1 }) => {
     const [response, loading] = useApi("https://dyrevelfaerd.herokuapp.com/api/v1/animals")
     // console.log("response", response);
     const params = {
