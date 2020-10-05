@@ -42,11 +42,9 @@ const AddNew = ({ response, resourceType, UserInfo }) => {
                 });
 
             const response = await axios.post(
-                'https://dyrevelfaerd.herokuapp.com/api/v1/animals',
+                `https://dyrevelfaerd.herokuapp.com/api/v1${resourceType}`,
                 qs.stringify({
-                    name: data.name,
-                    description: data.description,
-                    age: data.age,
+                    ...data,
                     assetId: UploadImagesResponse.data.id
                 }),
                 {
