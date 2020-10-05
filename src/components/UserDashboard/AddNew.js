@@ -16,7 +16,12 @@ form {
 padding: .25rem;
     border: 5px solid green;
 }
-
+.form-errors {
+    color: red;
+    :first-letter {
+    text-transform: uppercase;
+}
+}
 `
 const AddNew = ({ response, resourceType, UserInfo }) => {
     let contentTypes = ["title", "name", "content", "description", "age", "extra"];
