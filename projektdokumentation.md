@@ -104,5 +104,5 @@ useEffect bruges som et script der tilhøre et komponent. dette kan for eksempel
 ```
 
 ## Bilag:
-<a href="https://www.google.com" target="_blank">Kanban board</a>
+<a href="https://github.com/kasperbirch1/dyrevelfaerd/projects/1" target="_blank">Kanban board</a>
 

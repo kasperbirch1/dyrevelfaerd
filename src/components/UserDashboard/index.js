@@ -31,7 +31,7 @@ const StyledUserDashboardSection = styled.section`
 `
 
 const UserDashboard = ({ UserInfo }) => {
-    const [resourceType, setResourceType] = useState("/abouts");
+    const [resourceType, setResourceType] = useState("/animals");
     const [response, loading] = useApi(resourceType);
     // console.log("response", response);
 
