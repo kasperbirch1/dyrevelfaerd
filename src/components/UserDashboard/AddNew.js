@@ -21,7 +21,6 @@ padding: .25rem;
 const AddNew = ({ response, resourceType, UserInfo }) => {
     let contentTypes = ["title", "name", "content", "description", "age", "extra"];
     const { register, handleSubmit, errors } = useForm();
-
     const checkExtension = (file) => {
         const types = ['image/jpeg'];
         // console.log("checkExtension", types.includes(file[0].type))
@@ -86,20 +85,24 @@ const AddNew = ({ response, resourceType, UserInfo }) => {
             <h3 className="sub-title">Add New {resourceType}</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {response && Object.keys(response[0]).filter(el => contentTypes.includes(el)).map((ObjectElenemt, index) => {
+                    console.log("errors", errors && errors);
+
                     return (
-                        <fieldset style={{ display: 'grid' }} key={ObjectElenemt}>
-                            <label htmlFor={ObjectElenemt}>{ObjectElenemt}</label>
-                            <input style={{ width: '100%' }} type={typeof response[0][ObjectElenemt] === "string" ? "text" : "number"}
-                                placeholder={ObjectElenemt}
-                                name={ObjectElenemt}
-                                ref={register({
-                                    required: {
-                                        value: true,
-                                        message: `${ObjectElenemt} skal udfyldes`,
-                                    },
-                                })} />
-                            <span className="form-errors">{errors.ObjectElenemt && errors.ObjectElenemt.message}</span>
-                        </fieldset>
+                        <>
+                            <fieldset style={{ display: 'grid' }} key={ObjectElenemt}>
+                                <label htmlFor={ObjectElenemt}>{ObjectElenemt}</label>
+                                <input style={{ width: '100%' }} type={typeof response[0][ObjectElenemt] === "string" ? "text" : "number"}
+                                    placeholder={ObjectElenemt}
+                                    name={ObjectElenemt}
+                                    ref={register({
+                                        required: {
+                                            value: true,
+                                            message: `${ObjectElenemt} skal udfyldes`,
+                                        },
+                                    })} />
+                                <span className="form-errors">{errors[ObjectElenemt] && errors[ObjectElenemt].message}</span>
+                            </fieldset>
+                        </>
                     );
                 })}
                 {response && response[0].assetId && <>
@@ -114,6 +117,8 @@ const AddNew = ({ response, resourceType, UserInfo }) => {
                             },
                             validate: checkExtension
                         })} />
+                    <span className="form-errors">{errors.picture && errors.picture.message}</span>
+
                 </>}
                 <button type="submit">create new</button>
             </form>
