@@ -2,9 +2,9 @@
 ### Navn: Kasper Aleksander Birch
 #### Holdnr: WUHF02<br>Uddannelse: Webudvikler<br>Uddannelsessted: Roskilde Tekniske Skole
 <img alt="Project" src="./dokumentationsbilag-01.JPG" width="100%" />
-<a href="https://www.google.com" target="_blank">Link til Dyrevelfærd's hjemmeside</a>
+<a href="https://dyrevelfaerd.netlify.app/" target="_blank">Link til Dyrevelfærd's hjemmeside</a>
 <br>
-<a href="https://www.google.com" target="_blank">Link til login på Dyrevelfærd's hjemmeside</a>
+<a href="https://dyrevelfaerd.netlify.app/login" target="_blank">Link til login på Dyrevelfærd's hjemmeside</a>
 
 > Brugernavn: admin<br>Adgangskode: 1234
 

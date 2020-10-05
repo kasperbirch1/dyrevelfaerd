@@ -14,11 +14,11 @@ const StyledFormContainerDiv = styled.div`
 
 export const DynamicForm = ({ element, resourceType, UserInfo }) => {
     const [AssetId, setAssetId] = useState({});
-    console.log("element", element);
+    // console.log("element", element);
     let contentTypes = ["id", "title", "name", "content", "description", "age", "extra", "url", "assetId"];
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = async (data) => {
-        console.log("onSubmit Data:", { ...data, ...AssetId });
+        // console.log("onSubmit Data:", { ...data, ...AssetId });
         // console.log("AssetId", AssetId)
         try {
             const response = await axios.put(
